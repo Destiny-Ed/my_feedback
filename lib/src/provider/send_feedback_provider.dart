@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_feedback/src/models/feedback_type.dart';
 
-class SendFeedbackProvider extends ChangeNotifier {
+class SendFeedbackProvider  {
   // Feedback type selected by the user
   FeedbackType? _feedbackType;
   FeedbackType? get feedbackType => _feedbackType;
@@ -9,7 +9,7 @@ class SendFeedbackProvider extends ChangeNotifier {
   // Set feedback type and notify listeners of any changes
   void setFeedbackType(FeedbackType? type) {
     _feedbackType = type;
-    notifyListeners();
+    // notifyListeners();
   }
 
   // String? _apiToken;
@@ -28,7 +28,7 @@ class SendFeedbackProvider extends ChangeNotifier {
   set userIdEmail(String value) {
     if (_userIdEmail != value) {
       _userIdEmail = value;
-      notifyListeners();
+      // notifyListeners();
     }
   }
 
@@ -38,7 +38,7 @@ class SendFeedbackProvider extends ChangeNotifier {
   set userAdditionalMessage(String value) {
     if (_userAdditionalMessage != value) {
       _userAdditionalMessage = value;
-      notifyListeners();
+      // notifyListeners();
     }
   }
 
@@ -49,20 +49,20 @@ class SendFeedbackProvider extends ChangeNotifier {
   // Add an image to the uploaded images list and notify listeners
   void addImage(UploadedMediaModel image) {
     _uploadedImages.add(image);
-    notifyListeners();
+    // notifyListeners();
   }
 
   // Remove an image at a specific index and notify listeners
   void removeImage(int index) {
     if (index >= 0 && index < _uploadedImages.length) {
       _uploadedImages.removeAt(index);
-      notifyListeners();
+      // notifyListeners();
     }
   }
 
   // Clear all uploaded images and notify listeners
   void clearAll() {
     _uploadedImages.clear();
-    notifyListeners();
+    // notifyListeners();
   }
 }

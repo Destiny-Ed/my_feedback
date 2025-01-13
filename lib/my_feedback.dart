@@ -55,7 +55,7 @@ class _MyFeedbackState extends State<MyFeedback> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => FeedbackProvider()),
-        ChangeNotifierProvider(create: (_) => SendFeedbackProvider()),
+        // ChangeNotifierProvider(create: (_) => SendFeedbackProvider()),
         ChangeNotifierProvider(create: (_) => RecordingProvider()),
       ],
       child: child,
