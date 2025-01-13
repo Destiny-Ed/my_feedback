@@ -1,27 +1,17 @@
-// import 'my_feedback_platform_interface.dart';
-
-// class MyFeedback {
-//   Future<String?> getPlatformVersion() {
-//     return MyFeedbackPlatform.instance.getPlatformVersion();
-//   }
-// }
-
 import 'package:flutter/material.dart';
-import 'package:my_feedback/src/models/feedback_type.dart';
-import 'package:my_feedback/src/provider/feedback_provider.dart';
-import 'package:my_feedback/src/provider/recording_and_capture_provider.dart';
-import 'package:my_feedback/src/provider/send_feedback_provider.dart';
-import 'package:my_feedback/src/view/feedback_action_button.dart';
+import 'package:my_feedback/models/feedback_type.dart';
+import 'package:my_feedback/provider/feedback_provider.dart';
+import 'package:my_feedback/provider/recording_and_capture_provider.dart';
+import 'package:my_feedback/provider/send_feedback_provider.dart';
+import 'package:my_feedback/view/feedback_action_button.dart';
 import 'package:provider/provider.dart';
 import 'package:screenshot/screenshot.dart';
 
 class MyFeedback extends StatefulWidget {
   final Widget child;
-  // final String apiToken;
   const MyFeedback({
     super.key,
     required this.child,
-    //  required this.apiToken
   });
 
   @override
@@ -55,7 +45,7 @@ class _MyFeedbackState extends State<MyFeedback> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => FeedbackProvider()),
-        // ChangeNotifierProvider(create: (_) => SendFeedbackProvider()),
+        ChangeNotifierProvider(create: (_) => SendFeedbackProvider()),
         ChangeNotifierProvider(create: (_) => RecordingProvider()),
       ],
       child: child,

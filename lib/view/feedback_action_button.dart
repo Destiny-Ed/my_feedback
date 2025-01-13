@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:my_feedback/src/models/feedback_type.dart';
-import 'package:my_feedback/src/provider/feedback_provider.dart';
-import 'package:my_feedback/src/provider/recording_and_capture_provider.dart';
-import 'package:my_feedback/src/provider/send_feedback_provider.dart';
-import 'package:my_feedback/src/view/screenshot_and_draw.dart';
-import 'package:my_feedback/src/view/send_feedback_page.dart';
+import 'package:my_feedback/models/feedback_type.dart';
+import 'package:my_feedback/provider/feedback_provider.dart';
+import 'package:my_feedback/provider/recording_and_capture_provider.dart';
+import 'package:my_feedback/provider/send_feedback_provider.dart';
+import 'package:my_feedback/view/screenshot_and_draw.dart';
+import 'package:my_feedback/view/send_feedback_page.dart';
 import 'package:provider/provider.dart';
 import 'package:screenshot/screenshot.dart';
 

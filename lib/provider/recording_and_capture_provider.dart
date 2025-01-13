@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_screen_recording/flutter_screen_recording.dart';
-import 'package:my_feedback/src/models/recording_result.dart';
+import 'package:my_feedback/models/recording_result.dart';
 
 class RecordingProvider extends ChangeNotifier {
   bool _isRecording = false;

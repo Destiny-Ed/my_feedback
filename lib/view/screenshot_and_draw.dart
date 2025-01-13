@@ -1,10 +1,9 @@
 import 'dart:developer';
-import 'dart:io';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
-import 'package:my_feedback/src/models/feedback_type.dart';
-import 'package:my_feedback/src/provider/send_feedback_provider.dart';
-import 'package:my_feedback/src/view/send_feedback_page.dart';
+import 'package:my_feedback/models/feedback_type.dart';
+import 'package:my_feedback/provider/send_feedback_provider.dart';
+import 'package:my_feedback/view/send_feedback_page.dart';
 import 'package:provider/provider.dart';
 import 'package:painter/painter.dart';
 import 'package:screenshot/screenshot.dart';

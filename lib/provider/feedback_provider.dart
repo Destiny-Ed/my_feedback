@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:my_feedback/src/models/feedback_type.dart';
-import 'package:my_feedback/src/provider/send_feedback_provider.dart';
-import 'package:my_feedback/src/repo/feedback_repo.dart';
-import 'package:my_feedback/src/view/feedback_dialog.dart';
+import 'package:my_feedback/models/feedback_type.dart';
+import 'package:my_feedback/provider/send_feedback_provider.dart';
+import 'package:my_feedback/repo/feedback_repo.dart';
+import 'package:my_feedback/view/feedback_dialog.dart';
 import 'package:provider/provider.dart';
 
 class FeedbackProvider extends ChangeNotifier implements FeedbackRepo {
