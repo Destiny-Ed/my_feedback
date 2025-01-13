@@ -88,7 +88,7 @@ class FeedbackMediaResultModel {
 
 class Media {
   final String type;
-  final String url;
+  final dynamic url;
 
   Media({
     required this.type,
