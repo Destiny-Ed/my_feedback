@@ -33,7 +33,9 @@ class _MyFeedbackState extends State<MyFeedback> {
               child: widget.child,
             ),
             // Display FeedbackActionButton based on feedback type
-            _buildFeedbackAction(context),
+            Consumer<FeedbackProvider>(builder: (context, feedbackState, child) {
+              return _buildFeedbackAction(feedbackState);
+            }),
           ],
         ),
       ),
@@ -53,8 +55,7 @@ class _MyFeedbackState extends State<MyFeedback> {
   }
 
   /// Conditionally displays the [FeedbackActionButton] based on feedback type.
-  Widget _buildFeedbackAction(BuildContext context) {
-    final feedbackState = context.watch<FeedbackProvider>();
+  Widget _buildFeedbackAction(FeedbackProvider feedbackState) {
     return (feedbackState.feedbackType != FeedbackActionType.none &&
             feedbackState.feedbackType != FeedbackActionType.file)
         ? FeedbackActionButton(
