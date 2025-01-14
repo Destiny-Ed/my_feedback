@@ -7,6 +7,13 @@ import 'package:my_feedback/repo/feedback_repo.dart';
 import 'package:my_feedback/view/feedback_dialog.dart';
 import 'package:provider/provider.dart';
 
+class MyFeedbackCaller {
+  static showFeedbackModalWithResult(BuildContext context,
+      {required String userId, required Function(FeedbackMediaResultModel?) onResult}) {
+    context.read<FeedbackProvider>().showFeedBackWithResult(context, userId: userId, onResult: onResult);
+  }
+}
+
 class FeedbackProvider extends ChangeNotifier implements FeedbackRepo {
   Completer<void>? _feedbackCompleter;
 

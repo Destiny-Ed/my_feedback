@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:my_feedback/my_feedback.dart';
 import 'package:my_feedback/provider/feedback_provider.dart';
@@ -70,8 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           //send app feedback
-          await context.read<FeedbackProvider>().showFeedBackWithResult(context, userId: "talk2destinyed@gmail.com",
-              onResult: (value) {
+          MyFeedbackCaller.showFeedbackModalWithResult(context, userId: "talk2destinyed@gmail.com", onResult: (value) {
             log("Data available ${value?.toJson()}");
           });
         },
