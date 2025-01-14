@@ -8,7 +8,7 @@ import 'package:my_feedback/view/feedback_dialog.dart';
 import 'package:provider/provider.dart';
 
 class FeedbackProvider extends ChangeNotifier implements FeedbackRepo {
-  late Completer<void> _feedbackCompleter;
+  late Completer<void> _feedbackCompleter = Completer<void>();
 
   // Holds the current feedback action type
   FeedbackActionType _feedbackType = FeedbackActionType.none;

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:my_feedback/my_feedback.dart';
+import 'package:my_feedback/provider/feedback_provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -9,13 +11,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+    return MyFeedback(
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+        ),
+        home: const MyHomePage(title: 'Flutter Demo Home Page'),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
@@ -64,8 +68,12 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
+        onPressed: () async {
           //send app feedback
+          await context.read<FeedbackProvider>().showFeedBackWithResult(context, userId: "talk2destinyed@gmail.com",
+              onResult: (value) {
+            log("Data available ${value?.toJson()}");
+          });
         },
         tooltip: 'send feedback',
         child: const Icon(Icons.search),
