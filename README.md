@@ -211,7 +211,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
 How it works
 
-![alt text](https://github.com/Destiny-Ed/my_feedback/blob/main/assets/my_feedback_demo.mov)
+![alt text](https://github.com/Destiny-Ed/my_feedback/blob/main/assets/my_feedback_demo.gif)
 
 
 ## FAQ
