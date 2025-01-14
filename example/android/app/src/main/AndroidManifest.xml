@@ -1,4 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+     <uses-permission
+       android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:label="my_feedback_example"
         android:name="${applicationName}"
@@ -31,6 +37,12 @@
             android:name="flutterEmbedding"
             android:value="2" />
     </application>
+
+    <service
+	    android:name="com.foregroundservice.ForegroundService"
+	    android:foregroundServiceType="mediaProjection">
+    </service>
+
     <!-- Required to query activities that can process text, see:
          https://developer.android.com/training/package-visibility and
          https://developer.android.com/reference/android/content/Intent#ACTION_PROCESS_TEXT.

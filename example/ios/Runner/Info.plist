@@ -26,6 +26,13 @@
 	<true/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
+
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>In order to select and save photos, App requires access to your photo library.</string>
+	
+    <key>NSMicrophoneUsageDescription</key>
+    <string>We need access to your microphone for screen recording.</string>
+
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UISupportedInterfaceOrientations</key>

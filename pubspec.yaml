@@ -13,7 +13,6 @@ dependencies:
   flutter_screen_recording: ^2.0.19
   image_picker: ^1.1.2
   painter: ^2.0.0
-  plugin_platform_interface: ^2.0.2
   provider: ^6.1.2
   screenshot: ^3.0.0
 
