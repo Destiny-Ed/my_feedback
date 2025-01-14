@@ -209,11 +209,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
 ```
 
-How it works
-
-![alt text](https://github.com/Destiny-Ed/flutter_ripple/blob/main/assets/ripple.gif)
-
-
 ## FAQ
 
 Q: Is screen recording supported on all platforms?
