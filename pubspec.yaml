@@ -1,6 +1,6 @@
 name: my_feedback
 description: "Flutter plugin that helps developers collect user feedback seamlessly. With features like screen recording, screenshot annotation, and gallery uploads, this plugin simplifies the process of identifying bugs and gathering user suggestions."
-version: 1.0.0
+version: 1.0.1
 homepage: https://github.com/Destiny-Ed/my_feedback
 
 environment:
