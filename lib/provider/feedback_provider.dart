@@ -8,7 +8,7 @@ import 'package:my_feedback/view/feedback_dialog.dart';
 import 'package:provider/provider.dart';
 
 class FeedbackProvider extends ChangeNotifier implements FeedbackRepo {
-  late Completer<void> _feedbackCompleter = Completer<void>();
+  Completer<void>? _feedbackCompleter;
 
   // Holds the current feedback action type
   FeedbackActionType _feedbackType = FeedbackActionType.none;
@@ -29,8 +29,10 @@ class FeedbackProvider extends ChangeNotifier implements FeedbackRepo {
     notifyListeners();
 
     // If there's a pending completer, complete it
-    if (!_feedbackCompleter.isCompleted) {
-      _feedbackCompleter.complete();
+    if (_feedbackCompleter != null) {
+      if (!_feedbackCompleter!.isCompleted) {
+        _feedbackCompleter!.complete();
+      }
     }
   }
 
@@ -48,7 +50,7 @@ class FeedbackProvider extends ChangeNotifier implements FeedbackRepo {
 
     try {
       // Wait for the feedback result to be set
-      await _feedbackCompleter.future;
+      await _feedbackCompleter?.future;
 
       // Return the result to the callback
       onResult(_feedbackResult);
