@@ -6,9 +6,10 @@
 3. [Installation](#installation)
 4. [Getting Started](#getting-started)
 5. [Usage](#usage)
-6. [FAQ](#faq)
-7. [Contributing](#contributing)
-8. [License](#license)
+6. [Example](#example)
+7. [FAQ](#faq)
+8. [Contributing](#contributing)
+9. [License](#license)
 
 ---
 
@@ -41,33 +42,38 @@ flutter pub get
 ## Installation
 
 ## Android Configuration
-    1.	Add the following permissions to your AndroidManifest.xml file:
+
+1.	Add the following permissions to your AndroidManifest.xml file:
 
 ```xml
 <uses-permission android:name="android.permission.RECORD_AUDIO"/>
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+```
 
-    2.	Ensure your app targets API level 21 or higher.
+2.	Ensure your app targets API level 21 or higher.
 
-    3.	To your Android Manifest, under the <application> tag, add the following:
+3.	To your Android Manifest, under the <application> tag, add the following:
 
 ```xml
 <service
     android:name="com.foregroundservice.ForegroundService"
     android:foregroundServiceType="mediaProjection">
 </service>
+```
 
 
 
 ## iOS Configuration
-    1.	Add the required permissions to your Info.plist file:
+
+1.	Add the required permissions to your Info.plist file:
 
 ```plist
 <key>NSMicrophoneUsageDescription</key>
 <string>This app requires access to the microphone for recording feedback.</string>
 <key>NSPhotoLibraryUsageDescription</key>
 <string>This app requires access to the photo library for uploading images.</string>
+```
 
 ## Usage
 
@@ -91,13 +97,16 @@ Wrap Your Material or Cupertino App With MyFeedBack:
         );
     }
     }
-
+```
 
 // Start feedback and receive result
+
 ```dart
  MyFeedbackCaller.showFeedbackModalWithResult(context, userId: "user_identifier@gmail.com", onResult: (value) {
             log("Data available ${value?.toJson()}");
           });
+
+```
         
 
 // Feedback result with return types
@@ -108,6 +117,97 @@ Wrap Your Material or Cupertino App With MyFeedBack:
 
 ```json
 {email_id: talk2destinyed@gmail.com, message: hello, feedback_type: bug, media: [{type: screenshot, url: [137, 80, 78, 71, 13, 10, 26]}, {type: video, url: /storage/emulated/0/Android/data/com.example.app/cache/my_feedback_record_234.mp4}, {type: image, url: /data/user/0/com.example.app/cache/scaled_pq1hw8.jpg}]}
+```
+
+## Example
+
+```dart
+import 'dart:developer';
+
+import 'package:flutter/material.dart';
+import 'package:my_feedback/my_feedback.dart';
+import 'package:my_feedback/provider/feedback_provider.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MyFeedback(
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+        ),
+        home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      ),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key, required this.title});
+
+  final String title;
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  int _counter = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: Text(widget.title),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Text(
+              'You have pushed the button this many times:',
+            ),
+            Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+            const SizedBox(
+              height: 40,
+            ),
+            TextButton(
+                onPressed: () {
+                  setState(() {
+                    _counter++;
+                  });
+                },
+                child: Text("Increment counter"))
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          //send app feedback
+          MyFeedbackCaller.showFeedbackModalWithResult(context, userId: "talk2destinyed@gmail.com", onResult: (value) {
+            log("Data available ${value?.toJson()}");
+          });
+        },
+        tooltip: 'send feedback',
+        child: const Icon(Icons.search),
+      ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+}
+
+```
 
 
 FAQ
