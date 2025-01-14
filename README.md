@@ -31,11 +31,11 @@ Add the plugin to your `pubspec.yaml` file:
 ```yaml
 dependencies:
   my_feedback: ^1.0.0
-
+```
 
 Fetch the plugin by running:
 
-flutter pub get
+"flutter pub get"
 
 ---
 
@@ -210,7 +210,7 @@ class _MyHomePageState extends State<MyHomePage> {
 ```
 
 
-FAQ
+## FAQ
 
 Q: Is screen recording supported on all platforms?
 A: Currently, screen recording is supported on Android and iOS.
@@ -218,7 +218,7 @@ A: Currently, screen recording is supported on Android and iOS.
 Q: Can I customize the feedback UI?
 A: No, we are currently working on customization support to fit the app branding.
 
-Contributing
+## Contributing
 
 Contributions are welcome! Please follow these steps:
     1.	Fork the repository.
@@ -227,7 +227,7 @@ Contributions are welcome! Please follow these steps:
 
 Refer to the CONTRIBUTING.md file for more details.
 
-License
+## License
 
 This project is licensed under the MIT License.
 
