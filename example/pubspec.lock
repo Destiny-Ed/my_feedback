@@ -349,7 +349,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.0.1"
+    version: "1.0.1"
   nested:
     dependency: transitive
     description:
