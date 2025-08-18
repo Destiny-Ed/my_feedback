@@ -9,10 +9,9 @@ import 'package:screenshot/screenshot.dart';
 
 class MyFeedback extends StatefulWidget {
   final Widget child;
-  const MyFeedback({
-    super.key,
-    required this.child,
-  });
+  final Color primaryColor;
+  const MyFeedback(
+      {super.key, required this.child, this.primaryColor = Colors.blue});
 
   @override
   State<MyFeedback> createState() => _MyFeedbackState();
@@ -33,7 +32,8 @@ class _MyFeedbackState extends State<MyFeedback> {
               child: widget.child,
             ),
             // Display FeedbackActionButton based on feedback type
-            Consumer<FeedbackProvider>(builder: (context, feedbackState, child) {
+            Consumer<FeedbackProvider>(
+                builder: (context, feedbackState, child) {
               return _buildFeedbackAction(feedbackState);
             }),
           ],
@@ -56,6 +56,9 @@ class _MyFeedbackState extends State<MyFeedback> {
 
   /// Conditionally displays the [FeedbackActionButton] based on feedback type.
   Widget _buildFeedbackAction(FeedbackProvider feedbackState) {
+    //Set feedback primary color
+    feedbackState.primaryColor = widget.primaryColor;
+
     return (feedbackState.feedbackType != FeedbackActionType.none &&
             feedbackState.feedbackType != FeedbackActionType.file)
         ? FeedbackActionButton(

@@ -9,12 +9,25 @@ import 'package:provider/provider.dart';
 
 class MyFeedbackCaller {
   static showFeedbackModalWithResult(BuildContext context,
-      {required String userId, required Function(FeedbackMediaResultModel?) onResult}) {
-    context.read<FeedbackProvider>().showFeedBackWithResult(context, userId: userId, onResult: onResult);
+      {required String userId,
+      required Function(FeedbackMediaResultModel?) onResult}) {
+    context
+        .read<FeedbackProvider>()
+        .showFeedBackWithResult(context, userId: userId, onResult: onResult);
   }
 }
 
 class FeedbackProvider extends ChangeNotifier implements FeedbackRepo {
+  Color _primaryColor = Colors.blue;
+  Color get primaryColor => _primaryColor;
+
+  set primaryColor(Color color) {
+    _primaryColor = color;
+    Future.delayed(const Duration(seconds: 1), () {
+      notifyListeners();
+    });
+  }
+
   Completer<void>? _feedbackCompleter;
 
   // Holds the current feedback action type
@@ -45,7 +58,8 @@ class FeedbackProvider extends ChangeNotifier implements FeedbackRepo {
 
   @override
   Future<void> showFeedBackWithResult(BuildContext context,
-      {required String userId, required Function(FeedbackMediaResultModel?) onResult}) async {
+      {required String userId,
+      required Function(FeedbackMediaResultModel?) onResult}) async {
     ///Set feedback user Id
     context.read<SendFeedbackProvider>().userIdEmail = userId;
 
