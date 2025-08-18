@@ -15,6 +15,7 @@ class SendFeedbackPage extends StatefulWidget {
 }
 
 class _SendFeedbackPageState extends State<SendFeedbackPage> {
+  GlobalKey<FormState> _formKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -37,7 +38,9 @@ class _SendFeedbackPageState extends State<SendFeedbackPage> {
     final state = context.watch<SendFeedbackProvider>();
     return AppBar(
       title: Text(
-        state.feedbackType == FeedbackType.improvement ? "Suggest an Improvement" : "Report Bug",
+        state.feedbackType == FeedbackType.improvement
+            ? "Suggest an Improvement"
+            : "Report Bug",
       ),
       actions: [
         GestureDetector(
@@ -55,26 +58,35 @@ class _SendFeedbackPageState extends State<SendFeedbackPage> {
     final state = context.watch<SendFeedbackProvider>();
     return Padding(
       padding: const EdgeInsets.all(10.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          CustomTextField(
-            hintText: "Enter email or ID",
-            initialText: state.userIdEmail,
-            readOnly: true,
-            onChanged: (value) => state.userIdEmail = value,
-          ),
-          const SizedBox(height: 10),
-          CustomTextField(
-            hintText: "Additional Message",
-            minLines: 4,
-            maxLines: 6,
-            initialText: state.userAdditionalMessage,
-            onChanged: (value) => state.userAdditionalMessage = value,
-          ),
-          const SizedBox(height: 20),
-          Expanded(child: _buildImageGallery(context, state)),
-        ],
+      child: Form(
+        key: _formKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            CustomTextField(
+              hintText: "Enter email or ID",
+              initialText: state.userIdEmail,
+              readOnly: true,
+              validator: (value) {
+                return (value == "") ? "Required field" : null;
+              },
+              onChanged: (value) => state.userIdEmail = value,
+            ),
+            const SizedBox(height: 10),
+            CustomTextField(
+              hintText: "Additional Message",
+              minLines: 4,
+              maxLines: 6,
+              validator: (value) {
+                return (value == "") ? "Required field" : null;
+              },
+              initialText: state.userAdditionalMessage,
+              onChanged: (value) => state.userAdditionalMessage = value,
+            ),
+            const SizedBox(height: 20),
+            Expanded(child: _buildImageGallery(context, state)),
+          ],
+        ),
       ),
     );
   }
@@ -90,7 +102,8 @@ class _SendFeedbackPageState extends State<SendFeedbackPage> {
     );
   }
 
-  Widget _buildImagePreview(BuildContext context, UploadedMediaModel image, int index, SendFeedbackProvider state) {
+  Widget _buildImagePreview(BuildContext context, UploadedMediaModel image,
+      int index, SendFeedbackProvider state) {
     return Stack(
       children: [
         Container(
@@ -111,7 +124,9 @@ class _SendFeedbackPageState extends State<SendFeedbackPage> {
                       )
                     : null,
           ),
-          child: image.mediaType == MediaType.video ? const Icon(Icons.video_camera_back) : null,
+          child: image.mediaType == MediaType.video
+              ? const Icon(Icons.video_camera_back)
+              : null,
         ),
         Positioned(
           top: 0,
@@ -137,7 +152,7 @@ class _SendFeedbackPageState extends State<SendFeedbackPage> {
         return Container(
           padding: const EdgeInsets.only(top: 5),
           decoration: BoxDecoration(
-            color: Theme.of(context).primaryColorDark,
+            color: context.watch<FeedbackProvider>().primaryColor,
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(25),
               topRight: Radius.circular(25),
@@ -157,27 +172,33 @@ class _SendFeedbackPageState extends State<SendFeedbackPage> {
     );
   }
 
-  ListTile _buildSuggestionAction(BuildContext context, FeedbackActionModel action) {
+  ListTile _buildSuggestionAction(
+      BuildContext context, FeedbackActionModel action) {
     return ListTile(
       leading: CircleAvatar(child: Icon(action.icon)),
       title: Text(action.title),
       onTap: () async {
         switch (action.type) {
           case FeedbackActionType.screenshot:
-            context.read<FeedbackProvider>().setFeedbackActionType(FeedbackActionType.screenshot);
+            context
+                .read<FeedbackProvider>()
+                .setFeedbackActionType(FeedbackActionType.screenshot);
             Navigator.pop(context);
             break;
           case FeedbackActionType.recording:
-            context.read<FeedbackProvider>().setFeedbackActionType(FeedbackActionType.recording);
+            context
+                .read<FeedbackProvider>()
+                .setFeedbackActionType(FeedbackActionType.recording);
             Navigator.pop(context);
             break;
           case FeedbackActionType.file:
-            context.read<FeedbackProvider>().setFeedbackActionType(FeedbackActionType.file);
+            context
+                .read<FeedbackProvider>()
+                .setFeedbackActionType(FeedbackActionType.file);
             final imageResult = await pickImage();
             if (imageResult != null && context.mounted) {
-              context
-                  .read<SendFeedbackProvider>()
-                  .addImage(UploadedMediaModel(mediaPath: imageResult, mediaType: MediaType.image));
+              context.read<SendFeedbackProvider>().addImage(UploadedMediaModel(
+                  mediaPath: imageResult, mediaType: MediaType.image));
             }
             break;
           case FeedbackActionType.none:
@@ -188,17 +209,23 @@ class _SendFeedbackPageState extends State<SendFeedbackPage> {
   }
 
   void _handleSubmit(BuildContext context, SendFeedbackProvider state) {
-    if (state.userIdEmail.isEmpty || state.userAdditionalMessage.isEmpty || state.uploadedImages.isEmpty) return;
+    if (state.userIdEmail.isEmpty ||
+        state.userAdditionalMessage.isEmpty ||
+        state.uploadedImages.isEmpty) return;
 
     final result = FeedbackMediaResultModel(
       emailId: state.userIdEmail,
       feedbackType: state.feedbackType ?? FeedbackType.bug,
       message: state.userAdditionalMessage,
-      media: state.uploadedImages.map((e) => Media(type: e.mediaType.name, url: e.mediaPath)).toList(),
+      media: state.uploadedImages
+          .map((e) => Media(type: e.mediaType.name, url: e.mediaPath))
+          .toList(),
     );
 
     context.read<FeedbackProvider>().setFeedbackResult(result);
-    context.read<FeedbackProvider>().setFeedbackActionType(FeedbackActionType.none);
+    context
+        .read<FeedbackProvider>()
+        .setFeedbackActionType(FeedbackActionType.none);
     Navigator.pop(context);
   }
 }

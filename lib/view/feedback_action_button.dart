@@ -29,8 +29,10 @@ class FeedbackActionButton extends StatelessWidget {
             return Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                if (feedbackType == FeedbackActionType.screenshot) _buildScreenshotButton(context),
-                if (feedbackType == FeedbackActionType.recording) ..._buildRecordingButtons(context, recordingProvider),
+                if (feedbackType == FeedbackActionType.screenshot)
+                  _buildScreenshotButton(context),
+                if (feedbackType == FeedbackActionType.recording)
+                  ..._buildRecordingButtons(context, recordingProvider),
                 const SizedBox(height: 16),
                 _buildCancelButton(context),
               ],
@@ -51,7 +53,8 @@ class FeedbackActionButton extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => ScreenshotAndDrawScreen(capturedImage: capturedImage),
+              builder: (context) =>
+                  ScreenshotAndDrawScreen(capturedImage: capturedImage),
             ),
           );
         }
@@ -60,7 +63,8 @@ class FeedbackActionButton extends StatelessWidget {
     );
   }
 
-  List<Widget> _buildRecordingButtons(BuildContext context, RecordingProvider recordingProvider) {
+  List<Widget> _buildRecordingButtons(
+      BuildContext context, RecordingProvider recordingProvider) {
     final List<Widget> buttons = [];
 
     if (!recordingProvider.isRecording) {
@@ -128,7 +132,8 @@ class FeedbackActionButton extends StatelessWidget {
   }
 
   void _navigateToSendFeedbackPage(BuildContext context, String path) {
-    context.read<SendFeedbackProvider>().addImage(UploadedMediaModel(mediaPath: path, mediaType: MediaType.video));
+    context.read<SendFeedbackProvider>().addImage(
+        UploadedMediaModel(mediaPath: path, mediaType: MediaType.video));
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(builder: (context) => const SendFeedbackPage()),
