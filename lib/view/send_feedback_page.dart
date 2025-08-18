@@ -15,6 +15,7 @@ class SendFeedbackPage extends StatefulWidget {
 }
 
 class _SendFeedbackPageState extends State<SendFeedbackPage> {
+  GlobalKey<FormState> _formKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -57,26 +58,35 @@ class _SendFeedbackPageState extends State<SendFeedbackPage> {
     final state = context.watch<SendFeedbackProvider>();
     return Padding(
       padding: const EdgeInsets.all(10.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          CustomTextField(
-            hintText: "Enter email or ID",
-            initialText: state.userIdEmail,
-            readOnly: true,
-            onChanged: (value) => state.userIdEmail = value,
-          ),
-          const SizedBox(height: 10),
-          CustomTextField(
-            hintText: "Additional Message",
-            minLines: 4,
-            maxLines: 6,
-            initialText: state.userAdditionalMessage,
-            onChanged: (value) => state.userAdditionalMessage = value,
-          ),
-          const SizedBox(height: 20),
-          Expanded(child: _buildImageGallery(context, state)),
-        ],
+      child: Form(
+        key: _formKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            CustomTextField(
+              hintText: "Enter email or ID",
+              initialText: state.userIdEmail,
+              readOnly: true,
+              validator: (value) {
+                return (value == "") ? "Required field" : null;
+              },
+              onChanged: (value) => state.userIdEmail = value,
+            ),
+            const SizedBox(height: 10),
+            CustomTextField(
+              hintText: "Additional Message",
+              minLines: 4,
+              maxLines: 6,
+              validator: (value) {
+                return (value == "") ? "Required field" : null;
+              },
+              initialText: state.userAdditionalMessage,
+              onChanged: (value) => state.userAdditionalMessage = value,
+            ),
+            const SizedBox(height: 20),
+            Expanded(child: _buildImageGallery(context, state)),
+          ],
+        ),
       ),
     );
   }

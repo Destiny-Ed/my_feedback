@@ -7,6 +7,7 @@ class CustomTextField extends StatelessWidget {
   final bool readOnly;
   final int minLines;
   final int maxLines;
+  final String? Function(String?)? validator;
   final Function(String)? onChanged;
   final TextEditingController? controller;
 
@@ -18,6 +19,7 @@ class CustomTextField extends StatelessWidget {
       this.isFilled = false,
       this.readOnly = false,
       this.onChanged,
+      this.validator,
       this.minLines = 1,
       this.maxLines = 1});
 
@@ -30,6 +32,7 @@ class CustomTextField extends StatelessWidget {
       maxLines: maxLines,
       readOnly: readOnly,
       onChanged: onChanged,
+      validator: validator,
       decoration: InputDecoration(
         hintText: hintText,
         filled: isFilled,
